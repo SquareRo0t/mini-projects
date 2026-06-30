@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobbansökningar</title>
+</head>
+
+<body>
+    <h1>Jobbansökningar</h1>
+    <h3>Jobb som har ansökts</h3>
+
+    <form action="/add" method="POST">
+        <label for="company">Företagsnamn</label>
+        <input type="text" id="company" name="company">
+
+        <label for="date">Datum</label>
+        <input type="date" id="date" name="date">
+
+        <label for="recruite_name">Rekryterarens namn</label>
+        <input type="text" id="recruite_name" name="recruite_name">
+
+        <label for="email">E-post:</label>
+        <input type="email" id="email" name="email">
+
+        <label for="phone">Telefon</label>
+        <input type="tel" id="phone" name="phone">
+
+        <label for="status">Status</label>
+        <select name="status" id="status">
+            <option value="Sökt">Sökt</option>
+            <option value="Intervju">Intervju</option>
+            <option value="Avslag">Avslag</option>
+        </select>
+
+        <button type="submit">Spara</button>
+    </form>
+</body>
+
+</html>
