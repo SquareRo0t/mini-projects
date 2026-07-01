@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobbansökningar</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 
 <body>
     <h1>Jobbansökningar</h1>
-    <h3>Jobb som har ansökts</h3>
+    <h3>Jobb som jag har ansökt</h3>
 
     <form action="/add" method="POST">
-        <label for="company">Företagsnamn</label>
+        <label for="company">Företagsnamn</label><br>
         <input type="text" id="company" name="company">
 
         <label for="date">Datum</label>
