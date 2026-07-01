@@ -9,9 +9,17 @@ import sqlite3
 from flask import Flask, render_template, request, redirect
 app = Flask(__name__)
 
+#---------------------------------------------------------------
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor3 = conn.cursor()
+        data = cursor3.execute("SELECT * FROM JOB").fetchall()
+
+    return render_template("index.html", jobs=data)
+
+#---------------------------------------------------------------
 
 @app.route("/add", methods=["POST"])
 def add_job():
@@ -29,6 +37,34 @@ def add_job():
                         (company, date, recruites_name, email, phone, status))
         conn.commit()
     return redirect("/")
+
+#---------------------------------------------------------------
+
+@app.route("/delete/<int:job_id>", methods=["POST"])
+def delete_job(job_id):
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor4 = conn.cursor()
+        cursor4.execute("DELETE FROM JOB WHERE ID = ?", (job_id,))
+
+        conn.commit()
+    
+    return redirect("/")
+
+#---------------------------------------------------------------
+
+@app.route("/update/<int:job_id>", methods=["POST"])
+def update_job(job_id):
+    new_status = request.form["status"]
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor5 = conn.cursor()
+        cursor5.execute("UPDATE JOB SET status = ? WHERE id =?", (new_status,job_id,))
+
+        conn.commit()
+    
+    return redirect("/")
+
+#---------------------------------------------------------------
 
 def init_db():
     create_table = [
@@ -61,7 +97,7 @@ def init_db():
     except sqlite3.OperationalError as e:
         print("Failed to create tables:", e)
 
-
+#---------------------------------------------------------------
 
 if __name__ == '__main__':
     init_db()
