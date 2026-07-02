@@ -30,6 +30,9 @@ def add_job():
     email           = request.form["email"]
     phone           = request.form["phone"]
     status          = request.form["status"]
+
+    if not company or not date or not recruites_name or not email or not phone:
+        return redirect("/")
     
     with sqlite3.connect(DB_PATH) as conn:
         cursor1 = conn.cursor()
